@@ -6,8 +6,9 @@ RUN apt-get update \
     && apt-get install -y --force-yes sonar=5.1 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget http://repository.codehaus.org/org/codehaus/sonar-plugins/sonar-ldap-plugin/1.4/sonar-ldap-plugin-1.4.jar -P /opt/sonar/extensions/plugins
-RUN wget http://repository.codehaus.org/org/codehaus/sonar-plugins/javascript/sonar-javascript-plugin/2.5/sonar-javascript-plugin-2.5.jar -P /opt/sonar/extensions/plugins
+RUN wget http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins/sonar-ldap-plugin/1.4/sonar-ldap-plugin-1.4.jar -P /opt/sonar/extensions/plugins
+RUN wget http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins/javascript/sonar-javascript-plugin/2.5/sonar-javascript-plugin-2.5.jar -P /opt/sonar/extensions/plugins
+RUN wget http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins/java/sonar-findbugs-plugin/3.2/sonar-findbugs-plugin-3.2.jar -P /opt/sonar/extensions/plugins
 
 COPY ./config/. /config/
 RUN chmod +x /config/*
