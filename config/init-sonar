@@ -10,7 +10,7 @@ sed -i "s|#sonar.web.context=|sonar.web.context=${SONAR_WEB_CONTEXT=/}|g" /opt/s
 
 echo sonar.security.realm=${SONAR_SECURITY_REALM} >>/opt/sonar/conf/sonar.properties
 echo sonar.security.savePassword=true >>/opt/sonar/conf/sonar.properties
-echo ldap.url=ldap://ldap >>/opt/sonar/conf/sonar.properties
+echo ldap.url=ldap://${LDAP_HOST} >>/opt/sonar/conf/sonar.properties
 echo ldap.bindDn=${LDAP_BIND_DN} >>/opt/sonar/conf/sonar.properties
 echo ldap.bindPassword=${LDAP_BIND_PASSWORD} >>/opt/sonar/conf/sonar.properties
 echo ldap.user.baseDn=${LDAP_BASE_DN} >>/opt/sonar/conf/sonar.properties
