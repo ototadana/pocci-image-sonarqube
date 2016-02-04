@@ -3,7 +3,7 @@ MAINTAINER ototadana@gmail.com
 
 RUN echo "deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/" >> /etc/apt/sources.list
 RUN apt-get update \
-    && apt-get install -y --force-yes logrotate sonar=5.3 \
+    && apt-get install -y --force-yes logrotate sonar=5.3 vim \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://sonarsource.bintray.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-1.5.1.jar -P /opt/sonar/extensions/plugins
