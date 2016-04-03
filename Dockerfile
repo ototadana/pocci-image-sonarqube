@@ -1,14 +1,19 @@
 FROM java:openjdk-8u66-jdk
 MAINTAINER ototadana@gmail.com
 
+ENV SONARQUBE_VERSION 5.3
+ENV SONAR_LDAP_PLUGIN 1.5.1
+ENV SONAR_JAVASCRIPT_PLUGIN 2.10
+ENV SONAR_FINDBUGS_PLUGIN 3.3
+
 RUN echo "deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/" >> /etc/apt/sources.list
 RUN apt-get update \
-    && apt-get install -y --force-yes logrotate sonar=5.3 vim \
+    && apt-get install -y --force-yes logrotate sonar=${SONARQUBE_VERSION} vim \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-1.5.1.jar -P /opt/sonar/extensions/plugins
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-2.10.jar -P /opt/sonar/extensions/plugins
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-findbugs-plugin/sonar-findbugs-plugin-3.3.jar -P /opt/sonar/extensions/plugins
+RUN wget https://sonarsource.bintray.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-${SONAR_LDAP_PLUGIN}.jar -P /opt/sonar/extensions/plugins
+RUN wget https://sonarsource.bintray.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-${SONAR_JAVASCRIPT_PLUGIN}.jar -P /opt/sonar/extensions/plugins
+RUN wget https://sonarsource.bintray.com/Distribution/sonar-findbugs-plugin/sonar-findbugs-plugin-${SONAR_FINDBUGS_PLUGIN}.jar -P /opt/sonar/extensions/plugins
 
 COPY ./config/. /config/
 RUN mv /config/sonar.logrotate.conf /etc/logrotate.d/sonar
