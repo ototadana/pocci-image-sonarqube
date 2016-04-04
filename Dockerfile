@@ -1,9 +1,9 @@
-FROM java:openjdk-8u66-jdk
+FROM java:openjdk-8u72-jdk
 MAINTAINER ototadana@gmail.com
 
-ENV SONARQUBE_VERSION 5.3
+ENV SONARQUBE_VERSION 5.4
 ENV SONAR_LDAP_PLUGIN 1.5.1
-ENV SONAR_JAVASCRIPT_PLUGIN 2.10
+ENV SONAR_JAVASCRIPT_PLUGIN 2.11
 ENV SONAR_FINDBUGS_PLUGIN 3.3
 
 RUN echo "deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/" >> /etc/apt/sources.list
