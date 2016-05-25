@@ -3,7 +3,7 @@ MAINTAINER ototadana@gmail.com
 
 ENV SONARQUBE_VERSION 5.5
 ENV SONAR_LDAP_PLUGIN 1.5.1
-ENV SONAR_JAVASCRIPT_PLUGIN 2.12
+ENV SONAR_JAVASCRIPT_PLUGIN 2.13
 ENV SONAR_FINDBUGS_PLUGIN 3.3
 
 RUN echo "deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/" >> /etc/apt/sources.list
