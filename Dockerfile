@@ -1,4 +1,4 @@
-FROM openjdk:8u102-jdk
+FROM openjdk:8u111-jdk
 MAINTAINER ototadana@gmail.com
 
 ENV SONARQUBE_VERSION 6.1
