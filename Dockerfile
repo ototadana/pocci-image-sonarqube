@@ -10,7 +10,7 @@ ENV SONAR_L10N_JA_PLUGIN 1.4-SNAPSHOT
 
 RUN echo "deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/" >> /etc/apt/sources.list
 RUN apt-get update \
-    && apt-get install -y apt-transport-https \
+    && apt-get install -y apt-transport-https ca-certificates \
     && apt-get install -y --force-yes logrotate sonar=${SONARQUBE_VERSION} vim \
     && rm -rf /var/lib/apt/lists/*
 
