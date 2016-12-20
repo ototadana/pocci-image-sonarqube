@@ -8,11 +8,14 @@ ENV SONAR_FINDBUGS_PLUGIN 3.3
 ENV SONAR_GITLAB_PLUGIN 1.7.0
 ENV SONAR_L10N_JA_PLUGIN 1.4-SNAPSHOT
 
-RUN echo "deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/" >> /etc/apt/sources.list
 RUN apt-get update \
-    && apt-get install -y apt-transport-https ca-certificates \
-    && apt-get install -y --force-yes logrotate sonar=${SONARQUBE_VERSION} vim \
+    && apt-get install -y logrotate vim \
     && rm -rf /var/lib/apt/lists/*
+
+RUN wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip -P /tmp \
+    && unzip /tmp/sonarqube-${SONARQUBE_VERSION}.zip -d /opt \
+    && rm -f sonarqube-${SONARQUBE_VERSION}.zip \
+    && mv /opt/sonarqube-${SONARQUBE_VERSION} /opt/sonar
 
 RUN wget https://sonarsource.bintray.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-${SONAR_LDAP_PLUGIN}.jar -P /opt/sonar/extensions/plugins
 RUN wget https://sonarsource.bintray.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-${SONAR_JAVASCRIPT_PLUGIN}.jar -P /opt/sonar/extensions/plugins
