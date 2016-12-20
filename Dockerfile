@@ -18,7 +18,9 @@ RUN wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-${SONA
     && mv /opt/sonarqube-${SONARQUBE_VERSION} /opt/sonar \
     && cp /opt/sonar/conf/* /tmp \
     && tr -d \\r </tmp/sonar.properties >/opt/sonar/conf/sonar.properties \
-    && tr -d \\r </tmp/wrapper.conf >/opt/sonar/conf/wrapper.conf
+    && echo>>/opt/sonar/conf/sonar.properties \
+    && tr -d \\r </tmp/wrapper.conf >/opt/sonar/conf/wrapper.conf \
+    && echo>>/opt/sonar/conf/wrapper.conf
 
 RUN wget ${SONAR_LDAP_PLUGIN_URL} -P /opt/sonar/extensions/plugins
 RUN wget ${SONAR_JAVASCRIPT_PLUGIN_URL} -P /opt/sonar/extensions/plugins
