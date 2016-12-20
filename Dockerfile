@@ -2,9 +2,9 @@ FROM openjdk:8u111-jdk
 MAINTAINER ototadana@gmail.com
 
 ENV SONARQUBE_VERSION 6.2
-ENV SONAR_LDAP_PLUGIN 2.1.0.507
-ENV SONAR_JAVASCRIPT_PLUGIN 2.18.0.3454
-ENV SONAR_FINDBUGS_PLUGIN 3.3
+ENV SONAR_LDAP_PLUGIN_URL https://sonarsource.bintray.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-2.1.0.507.jar
+ENV SONAR_JAVASCRIPT_PLUGIN_URL https://sonarsource.bintray.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-2.18.0.3454.jar
+ENV SONAR_FINDBUGS_PLUGIN_URL https://github.com/SonarQubeCommunity/sonar-findbugs/releases/download/3.4/sonar-findbugs-plugin-3.4.3.jar
 ENV SONAR_GITLAB_PLUGIN 1.7.0
 ENV SONAR_L10N_JA_PLUGIN 1.4-SNAPSHOT
 
@@ -14,12 +14,15 @@ RUN apt-get update \
 
 RUN wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip -P /tmp \
     && unzip /tmp/sonarqube-${SONARQUBE_VERSION}.zip -d /opt \
-    && rm -f sonarqube-${SONARQUBE_VERSION}.zip \
-    && mv /opt/sonarqube-${SONARQUBE_VERSION} /opt/sonar
+    && rm -f /tmp/sonarqube-${SONARQUBE_VERSION}.zip \
+    && mv /opt/sonarqube-${SONARQUBE_VERSION} /opt/sonar \
+    && cp /opt/sonar/conf/* /tmp \
+    && tr -d \\r </tmp/sonar.properties >/opt/sonar/conf/sonar.properties \
+    && tr -d \\r </tmp/wrapper.conf >/opt/sonar/conf/wrapper.conf
 
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-${SONAR_LDAP_PLUGIN}.jar -P /opt/sonar/extensions/plugins
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-${SONAR_JAVASCRIPT_PLUGIN}.jar -P /opt/sonar/extensions/plugins
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-findbugs-plugin/sonar-findbugs-plugin-${SONAR_FINDBUGS_PLUGIN}.jar -P /opt/sonar/extensions/plugins
+RUN wget ${SONAR_LDAP_PLUGIN_URL} -P /opt/sonar/extensions/plugins
+RUN wget ${SONAR_JAVASCRIPT_PLUGIN_URL} -P /opt/sonar/extensions/plugins
+RUN wget ${SONAR_FINDBUGS_PLUGIN_URL} -P /opt/sonar/extensions/plugins
 RUN wget http://nexus.talanlabs.com/content/groups/public_release/com/synaptix/sonar-gitlab-plugin/${SONAR_GITLAB_PLUGIN}/sonar-gitlab-plugin-${SONAR_GITLAB_PLUGIN}.jar -P /opt/sonar/extensions/plugins
 RUN wget http://xpfriend.com/files/sonar-l10n-ja-plugin-${SONAR_L10N_JA_PLUGIN}.jar -P /opt/sonar/extensions/plugins
 

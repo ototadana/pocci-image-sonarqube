@@ -25,6 +25,7 @@ if [ -n "${http_proxy_host}" ]; then
     if [ -n "${http_proxy_user}" ]; then
         sed -i "s|#http.proxyUser=|http.proxyUser=${http_proxy_user}|g" /opt/sonar/conf/sonar.properties
         sed -i "s|#http.proxyPassword=|http.proxyPassword=${http_proxy_pass}|g" /opt/sonar/conf/sonar.properties
+        echo 'sonar.web.javaAdditionalOpts=-Djdk.http.auth.tunneling.disabledSchemes=""' >>/opt/sonar/conf/sonar.properties
     fi
 fi
 
