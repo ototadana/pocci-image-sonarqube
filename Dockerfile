@@ -1,7 +1,7 @@
 FROM openjdk:8u121-jdk
 MAINTAINER ototadana@gmail.com
 
-ENV SONARQUBE_VERSION 6.2.1
+ENV SONARQUBE_VERSION 6.3.0.18401
 ENV SONAR_LDAP_PLUGIN_URL https://sonarsource.bintray.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-2.1.0.507.jar
 ENV SONAR_JAVASCRIPT_PLUGIN_URL https://sonarsource.bintray.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-2.20.0.4207.jar
 ENV SONAR_FINDBUGS_PLUGIN_URL https://github.com/SonarQubeCommunity/sonar-findbugs/releases/download/3.4.4/sonar-findbugs-plugin-3.4.4.jar
